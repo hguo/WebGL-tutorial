@@ -39,7 +39,8 @@ varying vec4 vColor;
 
 void main(void) {
   // vec4 texcolor; 
-  gl_FragColor = vec4(FtexCoord, 1.0, 1.0); 
+  // gl_FragColor = vec4(FtexCoord, 1.0, 1.0); 
+  gl_FragColor = texture2D(myTexture, FtexCoord);
 }
 </script>
 
@@ -108,11 +109,12 @@ void main(void) {
 
   vec4 specular;  
   if (ndotl>0.0) 
-  specular = specular_coef* light_specular*pow(rdotv, mat_shininess); 
+    specular = specular_coef* light_specular*pow(rdotv, mat_shininess); 
   else
-  specular = vec4(0,0,0,1);  
+    specular = vec4(0,0,0,1);  
 
   vColor = ambient+diffuse+specular;
+  // vColor += texture2D(myTexture, aVertexTexCoords);
 
   FtexCoord = aVertexTexCoords; 
 
